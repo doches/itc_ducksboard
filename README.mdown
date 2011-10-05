@@ -1,0 +1,21 @@
+## iTunes Connect -> Ducksboard
+
+A couple of handy scripts for pushing iTunes Connect reports to Ducksboard.
+
+#### process_reports.rb
+Scans a directory containing daily sales reports downloaded with Apple's Auto-ingest tool, and creates two files for each located report, one containing the day's revenue in the requested currency (at today's exchange rate) and another containing the day's unit sales.
+
+    ruby process_reports.rb path/to/dir currency_code
+    
+   + **path/to/dir** is the directory containing gzipped iTunes reports
+   + **currency_code** is the desired currency code for revenue (e.g. USD, GBP)
+   
+#### update_ducksboard_graph.rb
+Scans a directory after processing with `process_reports.rb` and updates a [Ducksboard graph](https://support.ducksboard.com/entries/20184523-api-reference).
+
+    ruby update_ducksboard_graph.rb path/to/dir ext url apikey
+    
+   + **path/to/dir** is the directory containing the output of `process_reports.rb` (same as above)
+   + **ext** is one of `units`, for unit sales, or the currency code specified above, for revenue
+   + **url** the endpoint URL for Ducksboard
+   + **apikey** your api key for Ducksboard
